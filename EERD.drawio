@@ -1,11 +1,11 @@
-<mxfile host="app.diagrams.net" modified="2024-04-10T16:25:55.229Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0" etag="ubgge2fsDss1FNzCAMp5" version="24.2.3" type="github">
+<mxfile host="app.diagrams.net" modified="2024-04-10T16:27:59.430Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0" etag="ca4rWHNoD0VZtYP1lZ1x" version="24.2.3" type="github">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
-    <mxGraphModel dx="2137" dy="892" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2336" pageHeight="1654" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
+    <mxGraphModel dx="712" dy="297" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2336" pageHeight="1654" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="C-vyLk0tnHw3VtMMgP7b-23" value="USER" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=1;fontStyle=1;align=center;resizeLast=1;" parent="1" vertex="1">
-          <mxGeometry x="505" y="912" width="370" height="240" as="geometry" />
+          <mxGeometry x="505" y="912" width="370" height="247.99999999999977" as="geometry" />
         </mxCell>
         <mxCell id="C-vyLk0tnHw3VtMMgP7b-24" value="" style="shape=partialRectangle;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=1;" parent="C-vyLk0tnHw3VtMMgP7b-23" vertex="1">
           <mxGeometry y="30" width="370" height="30" as="geometry" />
@@ -21,16 +21,16 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="C-vyLk0tnHw3VtMMgP7b-27" value="" style="shape=partialRectangle;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" parent="C-vyLk0tnHw3VtMMgP7b-23" vertex="1">
-          <mxGeometry y="60" width="370" height="180" as="geometry" />
+          <mxGeometry y="60" width="370" height="188" as="geometry" />
         </mxCell>
         <mxCell id="C-vyLk0tnHw3VtMMgP7b-28" value="" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;" parent="C-vyLk0tnHw3VtMMgP7b-27" vertex="1">
-          <mxGeometry width="30" height="180" as="geometry">
-            <mxRectangle width="30" height="180" as="alternateBounds" />
+          <mxGeometry width="30" height="188" as="geometry">
+            <mxRectangle width="30" height="188" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="C-vyLk0tnHw3VtMMgP7b-29" value="username tinytext (100) NOT NULL&#xa;&#xa;user_type ENUM (&#39;Administrator&#39;,&#xa;                        &#39;Health Care Provider&#39;,&#xa;                        &#39;Intervention Organizer&#39;,&#xa;                        &#39;Intervention Volunteer&#39;,&#xa;                        &#39;Policy Maker&#39;,&#xa;                        &#39;Member&#39;) NOT NULL DEFAULT &#39;Member&#39;&#xa;&#xa;email tinytext (200) NOT NULL&#xa;password tinytext (100) NOT NULL&#xa;address (city, area) longtext NOT NULL" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;" parent="C-vyLk0tnHw3VtMMgP7b-27" vertex="1">
-          <mxGeometry x="30" width="340" height="180" as="geometry">
-            <mxRectangle width="340" height="180" as="alternateBounds" />
+        <mxCell id="C-vyLk0tnHw3VtMMgP7b-29" value="username tinytext (100) NOT NULL&#xa;&#xa;user_type ENUM (&#39;Administrator&#39;,&#xa;                        &#39;Health Care Provider&#39;,&#xa;                        &#39;Intervention Organizer&#39;,&#xa;                        &#39;Intervention Volunteer&#39;,&#xa;                        &#39;Policy Maker&#39;,&#xa;                        &#39;Member&#39;) NOT NULL DEFAULT &#39;Member&#39;&#xa;&#xa;{email} tinytext (200) NOT NULL&#xa;{phone_number} tinytext (500)&#xa;password tinytext (100) NOT NULL&#xa;address (city, area) longtext NOT NULL" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;" parent="C-vyLk0tnHw3VtMMgP7b-27" vertex="1">
+          <mxGeometry x="30" width="340" height="188" as="geometry">
+            <mxRectangle width="340" height="188" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
         <mxCell id="Pu0zvANKRgPWiGbxQ75c-2" value="" style="fontSize=12;html=1;endArrow=ERmandOne;startArrow=ERmandOne;rounded=0;entryX=0.555;entryY=1.012;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.499;exitY=0.013;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="Pu0zvANKRgPWiGbxQ75c-9" target="Pu0zvANKRgPWiGbxQ75c-6">
