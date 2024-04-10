@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-04-10T17:18:39.149Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0" etag="gvEmHcLu_TAEdsn51_FZ" version="24.2.3" type="github">
+<mxfile host="app.diagrams.net" modified="2024-04-10T17:20:23.322Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0" etag="3hcoDyNKCDZI613pYSVz" version="24.2.3" type="github">
   <diagram name="Page-1" id="2q1C1uKWbJOoHwZ1PiuB">
-    <mxGraphModel dx="571" dy="619" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2336" pageHeight="1654" math="0" shadow="0">
+    <mxGraphModel dx="483" dy="351" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -44,6 +44,18 @@
         </mxCell>
         <mxCell id="OzQULG-dRKaMRiAVHQlx-11" value="&lt;u style=&quot;text-decoration: dotted underline&quot;&gt;user_id&lt;/u&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="440" y="230" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="OzQULG-dRKaMRiAVHQlx-13" value="password" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="88" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="OzQULG-dRKaMRiAVHQlx-14" value="country" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="88" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="OzQULG-dRKaMRiAVHQlx-15" value="city" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="88" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="OzQULG-dRKaMRiAVHQlx-16" value="area" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="88" width="80" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
