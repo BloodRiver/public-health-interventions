@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-04-10T17:50:31.148Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0" etag="OVa33m7GYmMiwbgO8fQ1" version="24.2.3" type="github">
+<mxfile host="app.diagrams.net" modified="2024-04-10T17:53:14.913Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0" etag="0VWwKxI8Lw8vWJ0c6OD7" version="24.2.3" type="github">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
-    <mxGraphModel dx="1318" dy="956" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2336" pageHeight="1654" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
+    <mxGraphModel dx="763" dy="554" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2336" pageHeight="1654" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -353,7 +353,7 @@
             <mxRectangle width="30" height="50" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Pu0zvANKRgPWiGbxQ75c-62" value="date_reported date NOT NULL&#xa;title tinytext(300) NOT NULL&#xa;content longtext NOT NULL" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;" vertex="1" parent="Pu0zvANKRgPWiGbxQ75c-60">
+        <mxCell id="Pu0zvANKRgPWiGbxQ75c-62" value="date_reported date NOT NULL&#xa;report_title tinytext(300) NOT NULL&#xa;content longtext NOT NULL" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;" vertex="1" parent="Pu0zvANKRgPWiGbxQ75c-60">
           <mxGeometry x="30" width="370" height="50" as="geometry">
             <mxRectangle width="370" height="50" as="alternateBounds" />
           </mxGeometry>
