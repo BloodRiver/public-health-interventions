@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-04-11T15:13:04.300Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0" etag="pI2avBBmMz7qAPWz1lln" version="24.2.3" type="github">
+<mxfile host="app.diagrams.net" modified="2024-04-11T15:18:12.364Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0" etag="qUHuFICkT5zb_jfjm1x1" version="24.2.3" type="github">
   <diagram name="Page-1" id="BUNKWT5Qqu0lzgFFmWvQ">
     <mxGraphModel dx="733" dy="751" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -174,6 +174,24 @@
         </mxCell>
         <mxCell id="BMht20Ln3k7jBjvpvkgt-68" value="after_intervention_description" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="550" y="140" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="BMht20Ln3k7jBjvpvkgt-69" value="volunteer_id" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="730" y="140" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="BMht20Ln3k7jBjvpvkgt-70" value="volunteer_present" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="820" y="140" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="BMht20Ln3k7jBjvpvkgt-71" value="report_id" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="930" y="140" width="70" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="BMht20Ln3k7jBjvpvkgt-72" value="date_reported" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="140" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="BMht20Ln3k7jBjvpvkgt-73" value="report_title" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="140" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="BMht20Ln3k7jBjvpvkgt-74" value="report_content" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="140" width="90" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
