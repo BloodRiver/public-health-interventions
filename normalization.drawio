@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-04-11T15:12:32.979Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0" etag="JUHNhz4bpwviOdiyj095" version="24.2.3" type="github">
+<mxfile host="app.diagrams.net" modified="2024-04-11T15:13:04.300Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0" etag="pI2avBBmMz7qAPWz1lln" version="24.2.3" type="github">
   <diagram name="Page-1" id="BUNKWT5Qqu0lzgFFmWvQ">
     <mxGraphModel dx="733" dy="751" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -7,7 +7,7 @@
         <mxCell id="BMht20Ln3k7jBjvpvkgt-50" value="INTERVENTION" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=none;" vertex="1" parent="1">
           <mxGeometry x="1420" y="400" width="120" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="BMht20Ln3k7jBjvpvkgt-17" value="INTERVENTION_RESULT_AND_CHART" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=none;" vertex="1" parent="1">
+        <mxCell id="BMht20Ln3k7jBjvpvkgt-17" value="INTERVENTION" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=none;" vertex="1" parent="1">
           <mxGeometry x="50" y="40" width="240" height="40" as="geometry" />
         </mxCell>
         <mxCell id="BMht20Ln3k7jBjvpvkgt-1" value="intervention_id" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
