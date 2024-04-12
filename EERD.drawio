@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-04-12T03:24:02.914Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0" etag="GrLh3x0KsU_0uB-a2rj6" version="24.2.3" type="github">
+<mxfile host="app.diagrams.net" modified="2024-04-12T03:25:40.169Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0" etag="onzs_h4rw6a4iKQ_6ZOX" version="24.2.3" type="github">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
-    <mxGraphModel dx="2137" dy="892" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2336" pageHeight="1654" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
+    <mxGraphModel dx="1026" dy="428" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2336" pageHeight="1654" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -178,7 +178,7 @@
             <mxRectangle width="30" height="60" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Pu0zvANKRgPWiGbxQ75c-32" value="chart_type NOT NULL&#xa;data longtext NOT NULL&#xa;chart_placement char(2) // &#39;B&#39; or &#39;A&#39; for before or after" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;" parent="Pu0zvANKRgPWiGbxQ75c-30" vertex="1">
+        <mxCell id="Pu0zvANKRgPWiGbxQ75c-32" value="chart_type char(3) NOT NULL // &#39;bv&#39;, &#39;bh&#39;, &#39;pi&#39;, &#39;lg&#39; vertical chart,&#xa;// horizontal bar chart, pie chart, line graph&#xa;data longtext NOT NULL&#xa;chart_placement char(2) // &#39;B&#39; or &#39;A&#39; for before or after" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;" parent="Pu0zvANKRgPWiGbxQ75c-30" vertex="1">
           <mxGeometry x="30" width="366.3214285714286" height="60" as="geometry">
             <mxRectangle width="366.3214285714286" height="60" as="alternateBounds" />
           </mxGeometry>
