@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS `user` (
     `username` TINYTEXT NOT NULL , 
     `email` TINYTEXT NOT NULL , 
     `phone_number` TINYTEXT NOT NULL , 
-    `password` TINYTEXT NOT NULL , 
+    `password` LONGTEXT NOT NULL , 
     `address` LONGTEXT NOT NULL , 
     `user_type` CHAR(4) NOT NULL , 
     PRIMARY KEY (`user_id`)
