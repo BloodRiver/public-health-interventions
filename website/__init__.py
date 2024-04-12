@@ -33,14 +33,7 @@ def create_app(test_config=None):
     # This is where the coding starts
     @app.route("/")
     def index():
-        db = database.get_db()
-        cursor = db.cursor()
-        cursor.execute("SELECT * FROM poll")
-        polls_from_database = cursor.fetchall()
-
-        # print("polls:", polls)
-
-        return render_template("index.html", polls=polls_from_database)
+        return render_template("index.html")
 
     
     return app
