@@ -30,7 +30,8 @@ def init_db():
         schema_sql = f.read().decode('utf8')
 
         for statement in schema_sql.split(";"):
-            cursor.execute(statement)
+            if (statement.strip()):
+                cursor.execute(statement)
 
         db.commit()
 
