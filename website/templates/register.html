@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Register - {% endblock %}
+
+{% block body %}
+<div class="container mb-3" style="margin-top: 50px;">
+    <form name="registerForm" method="POST" enctype="multipart/form-data">
+        <legend>Register</legend>
+        <div class="mb-3">
+            <label for="username_input" class="form-label">Username</label>
+            <input required type="text" class="form-control " value="{{ username }}" id="username_input"
+                name="username">
+
+        </div>
+        <div class="mb-3">
+            <label for="email_input" class="form-label">Email</label>
+            <input required type="email" class="form-control {% if error == 'email' %}is-invalid{% endif %}"
+                id="email_input" name="email" value="{{ email }}">
+            {% if error == 'email' %}
+            <div id="email_validation_feedback" class="invalid-feedback">
+                That email already exists in the database
+            </div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            <label for="phone_number_input" class="form-label">Phone Number</label>
+            <input required type="text" class="form-control {% if error=='phone_number' %}is-invalid{% endif %}"
+                id="phone_number_input" name="phone_number" value="{{ phone_number }}">
+            {% if error == 'phone_number' %}
+            <div id="phone_number_validation_feedback" class="invalid-feedback">
+                That phone number already exists in the database
+            </div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            <label for="country_input" class="form-label">Country</label>
+            <input required type="text" class="form-control" id="country_input" name="country" value="{{ country }}">
+        </div>
+        <div class="mb-3">
+            <label for="city_input" class="form-label">City</label>
+            <input required type="text" class="form-control" id="city_input" name="city" value="{{ city }}">
+        </div>
+        <div class="mb-3">
+            <label for="area_input" class="form-label">Area</label>
+            <input required type="text" class="form-control" id="area_input" name="area" value="{{ area }}">
+        </div>
+        <div class="mb-3">
+            <label for="password_input" class="form-label">Password</label>
+            <input required type="password" class="form-control" id="password_input" name="password">
+        </div>
+        <div class="mb-3">
+            <label for="retype_password_input" class="form-label">Re-type Password</label>
+            <input required type="password" class="form-control" id="retype_password_input">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</div>
+{% endblock %}

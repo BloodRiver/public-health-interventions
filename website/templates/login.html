@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - {% endblock %}
+
+{% block body %}
+<div class="container" style="margin-top: 50px;">
+    <form name="loginForm" method="POST" enctype="multipart/form-data">
+        <legend>Login</legend>
+        <div class="mb-3">
+            <label for="email_input" class="form-label">Email</label>
+            <input required type="email" class="form-control {% if error == 'email' %}is-invalid{% endif %}" id="email_input"
+                name="email" value="{{ email }}">
+            {% if error == 'email' %}
+                <div id="email_validation_feedback" class="invalid-feedback">
+                    There is no user associated with that email
+                </div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            <label for="password_input" class="form-label">Password</label>
+            <input required type="password" class="form-control {% if error == 'password' %}is-invalid{% endif %}"
+                id="password_input" name="password">
+            {% if error == 'password' %}
+                <div id="email_validation_feedback" class="invalid-feedback">
+                    Incorrect Password
+                </div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+</div>
+{% endblock %}
