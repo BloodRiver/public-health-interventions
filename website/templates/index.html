@@ -59,7 +59,7 @@
         </div>
     </section>
 
-    <section class="mb-3">
+    <section class="mb-3 b">
         <h2>Upcoming events</h2>
         <div class="row row-cols-3 mb-3">
             {% if latest_events %}
@@ -68,16 +68,17 @@
                     <div class="card" style="width: 18rem;">
                         <img src="..." class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">{{ each_event['event_name'] }}</h5>
-                            <p class="card-text">{{ each_event['event_details'] }}</p>
-                            <a class="btn btn-link" href="{{ url_for('events', id=each_event['id']) }}">Learn More</a>
+                            <h5 class="card-title">{{ each_event[1] }}</h5>
+                            <h6 class="card-subtitle text-body-secondary">Venue: {{ each_event[2] }}</h6>
+                            <p class="card-text">{{ each_event[3] }}</p>
+                            <a class="btn btn-link" href="{{ url_for('events', id=each_event[0]) }}">Learn More</a>
                         </div>
                     </div>
                 </div>
                 {% endfor %}
-                {% else %}
+            {% else %}
                 <h4>Events coming soon</h4>
-                {% endif %}
+            {% endif %}
         </div>
         {% if latest_events %}
             <a class="btn btn-primary" href="{{ url_for('events') }}">See More Events</a>
@@ -88,18 +89,18 @@
         <h2>Latest blog posts from our Health Care Professionals</h2>
         <div class="row row-cols-3 mb-3">
             {% if blog_posts %}
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                                the
-                                card's content.</p>
-                            <a class="btn btn-link" href="#">Read More</a>
+                {% for each_blog_post in blog_posts %}
+                    <div class="col">
+                        <div class="card" style="width: 18rem;">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ each_blog_post[1] }}</h5>
+                                <p class="card-text">{{ each_blog_post[2] }}</p>
+                                <a class="btn btn-link" href="{{ url_for('blog', id=each_blog_post[0]) }}">Read More</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% endfor %}
             {% else %}
                 <h4>Blog posts coming soon</h4>
             {% endif %}

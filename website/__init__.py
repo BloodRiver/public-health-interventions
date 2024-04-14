@@ -2,12 +2,15 @@ import os
 
 from flask import Flask, render_template, request, session, redirect
 from markupsafe import escape
-from . import db as database
+from flask_ckeditor import CKEditor
+
+ckeditor = CKEditor()
 
 
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
+    ckeditor.init_app(app)
     app.config.from_mapping(
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
@@ -33,7 +36,14 @@ def create_app(test_config=None):
     # This is where the coding starts
     @app.route("/")
     def index():
-        return render_template("index.html")
+        mydb = db.get_db()
+        cursor = mydb.cursor()
+        cursor.execute("SELECT intervention_id, event_name, event_venue, event_details FROM intervention WHERE event_status='Upcoming' ORDER BY start_date LIMIT 3")
+        latest_events = cursor.fetchall()
+        cursor.execute("SELECT article_id, title, content FROM article WHERE article_type='B' ORDER BY date_published DESC LIMIT 3")
+        blog_posts = cursor.fetchall()
+        cursor.close()
+        return render_template("index.html", latest_events=latest_events, blog_posts=blog_posts)
     
     @app.route("/login/", methods=('GET', 'POST'))
     def login():
@@ -41,7 +51,6 @@ def create_app(test_config=None):
             return render_template("login.html")
 
         if request.method == 'POST':
-            print(request.form)
             email = escape(request.form['email'])
             password = escape(request.form['password'])
 
@@ -115,6 +124,69 @@ def create_app(test_config=None):
     @app.route("/blog/<id>")
     def blog(id=None):
         return render_template("blog.html")
+    
+    @app.route("/dashboard/")
+    @app.route("/dashboard")
+    def dashboard():
+        if request.method == "GET":
+            if not session.get('user'):
+                return redirect(app.url_for("login"))
+            if request.url.rfind("?", 1) == -1:
+                if session.get("user")['user_type'] == 'HCP':
+                    return redirect(app.url_for("dashboard", page='blog_articles'))
+                if session.get("user")['user_type'] == 'ADM':
+                    return redirect(app.url_for("dashboard", page='faq_articles'))
+                if session.get("user")['user_type'] == 'ORG' or session.get("user")['user_type'] == 'VOL':
+                    return redirect(app.url_for("dashboard", page='intervention_events'))
+            if request.url.endswith("?page=blog_articles"):
+                if session.get("user")['user_type'] in ('HCP', 'ADM'):
+                    mydb = db.get_db()
+                    cursor = mydb.cursor()
+                    cursor.execute(f"SELECT article_id, title, date_published, content FROM article WHERE author_id={session.get('user')['user_id']} AND article_type='B' ORDER BY date_published DESC")
+                    my_articles = cursor.fetchall()
+                    return render_template("dashboard.html", my_articles=my_articles)
+                else:
+                    return "<h1>Page Not Found</h1>"
+            elif request.url.endswith("?page=faq_articles"):
+                if session.get("user")['user_type'] == 'ADM':
+                    mydb = db.get_db()
+                    cursor = mydb.cursor()
+                    cursor.execute(f"SELECT article_id, title, date_published, content FROM article WHERE author_id={session.get('user')['user_id']} AND article_type='F' ORDER BY date_published DESC")
+                    my_articles = cursor.fetchall()
+                    return render_template("dashboard.html", my_articles=my_articles)
+                else:
+                    return "<h1>Page Not Found</h1>"
+            elif request.url.endswith('?page=intervention_events'):
+                if session.get("user")['user_type'] in ('ORG', 'ADM'):
+                    mydb = db.get_db()
+                    cursor = mydb.cursor()
+                    cursor.execute(f"SELECT intervention_id, event_name, event_venue, start_date, end_date, event_details FROM intervention WHERE organizer_id={session.get('user')['user_id']} ORDER BY start_date DESC")
+                    intervention_events = cursor.fetchall()
+                    return render_template("dashboard.html", intervention_events=intervention_events)
+                else:
+                    return "<h1>Page Not Found</h1>"
+            elif request.url.endswith('?page=intervention_reports'):
+                if session.get("user")['user_type'] in ('ORG', 'ADM'):
+                    mydb = db.get_db()
+                    cursor = mydb.cursor()
+                    cursor.execute(f"""
+                        SELECT 
+                            intervention_report.report_id, user.username,
+                            intervention_report.date_reported,
+                            intervention_report.report_title,
+                            intervention_report.report_content
+                        FROM intervention_report, intervention, user
+                        WHERE intervention_report.author_id=1
+                                AND user.user_id=intervention_report.author_id 
+                        ORDER BY intervention_report.date_reported DESC;
+                    """)
+                    intervention_reports = cursor.fetchall()
+                    print(intervention_reports)
+                    return render_template("dashboard.html", intervention_reports=intervention_reports)
+                else:
+                    return "<h1>Page Not Found</h1>"
+            else:
+                return "<h1>Page Not Found</h1>"
 
     
     return app

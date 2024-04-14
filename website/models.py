@@ -82,6 +82,7 @@ class User:
     
     def to_json(self) -> dict:
         return {
+            'user_id': self.__user_id,
             'username': self.__username,
             'user_type': self.__user_type
         }
