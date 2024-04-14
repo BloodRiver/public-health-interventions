@@ -18,24 +18,179 @@
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <ul class="nav flex-column nav-fill">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Active</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                </li>
+            <ul class="nav flex-column nav-pills nav-fill">
+                {% if session.get('user')['user_type'] == 'ADM' %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.url.endswith('?page=faq_articles') %}active{% endif %}" aria-current="page" href="?page=faq_articles">FAQ Articles</a>
+                    </li>
+                {% endif %}
+                {% if session.get('user')['user_type'] in ('HCP', 'ADM') %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.url.endswith('?page=blog_articles') %}active{% endif %}" href="?page=blog_articles">Blog Posts</a>
+                    </li>
+                {% endif %}
+                {% if session.get('user')['user_type'] in ('ORG', 'ADM') %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.url.endswith('?page=intervention_events') %}active{% endif %}" href="?page=intervention_events">Intervention Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.url.endswith('?page=intervention_reports') %}active{% endif %}" href="?page=intervention_reports">Intervention Reports</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>
+</div>
 
-    
-
+<div class="container" style="min-height: 500px;">
+    {% if request.url.endswith('?page=blog_articles') %}
+        <h2>My Blog Articles:</h2>
+        {% if my_articles %}
+            <a class="btn btn-primary mb-3" href="#"><i class="bi bi-plus"></i>&nbsp;Create New Blog Article</a>
+            <div class="row row-cols-auto">
+                {% for each_article in my_articles %}
+                    <div class="col mb-3">
+                        <div class="card mb-3" style="width: 18rem;">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ each_article[1] }}</h5>
+                                <h6 class="card-subtitle text-body-secondary">Date Published: {{ each_article[2] }}</h6>
+                                <p class="card-text text-truncate">{{ each_article[3] }}</p>
+                                <a href="{{ url_for('blog', id=each_article[0]) }}" class="icon-link">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <h3>You currently have no articles</h3>
+            <a class="btn btn-primary" href="#"><i class="bi bi-plus"></i>&nbsp;Create New Blog Article</a>
+        {% endif %}
+    {% elif request.url.endswith('?page=faq_articles') %}
+        <h2>My FAQ Articles:</h2>
+        {% if my_articles %}
+            <a class="btn btn-primary mb-3" href="#"><i class="bi bi-plus"></i>&nbsp;Create New FAQ Article</a>
+            <div class="row row-cols-auto">
+                {% for each_article in my_articles %}
+                    <div class="col mb-3">
+                        <div class="card mb-3" style="width: 18rem;">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ each_article[1] }}</h5>
+                                <h6 class="card-subtitle text-body-secondary">Date Published: {{ each_article[2] }}</h6>
+                                <p class="card-text text-truncate">{{ each_article[3] }}</p>
+                                <div class="d-flex">
+                                    <div class="p-2">
+                                        <a href="{{ url_for('blog', id=each_article[0]) }}" class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i>&nbsp; Edit</a>
+                                    </div>
+                                    <div class="p-2 ms-auto">
+                                        <a href="{{ url_for('blog', id=each_article[0]) }}" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i>&nbsp; Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <h3>You currently have no articles</h3>
+            <a class="btn btn-primary" href="#"><i class="bi bi-plus"></i>&nbsp;Create New FAQ Article</a>
+        {% endif %}
+    {% elif  request.url.endswith('?page=intervention_events')%}
+        <h2>My Intervention Events:</h2>
+        {% if intervention_events %}
+            <a class="btn btn-primary mb-3" href="#"><i class="bi bi-plus"></i>&nbsp;Create New Intervention Event</a>
+            <div class="row row-cols-auto">
+                {% for each_event in intervention_events %}
+                    <div class="col mb-3">
+                        <div class="card mb-3" style="width: 18rem;">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ each_event[1] }}</h5>
+                                <h6 class="card-subtitle text-body-secondary">Event Venue: {{ each_event[2] }}</h6>
+                                <h6 class="card-subtitle text-body-secondary">Start Date: {{ each_event[3] }}</h6>
+                                <h6 class="card-subtitle text-body-secondary">End Date: {{ each_event[4] }}</h6>
+                                <p class="card-text text-truncate">{{ each_event[5] }}</p>
+                                <div class="d-flex">
+                                    <div class="p-2">
+                                        <a href="{{ url_for('blog', id=each_event[0]) }}" class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i>&nbsp; Edit</a>
+                                    </div>
+                                    <div class="p-2 ms-auto">
+                                        <a href="{{ url_for('blog', id=each_event[0]) }}" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i>&nbsp; Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <h3>You currently have no intervention events</h3>
+            <a class="btn btn-primary" href="#"><i class="bi bi-plus"></i>&nbsp;Create New Intervention Event</a>
+        {% endif %}
+    {% elif  request.url.endswith('?page=intervention_events')%}
+        <h2>My Intervention Events:</h2>
+        {% if intervention_events %}
+            <a class="btn btn-primary mb-3" href="#"><i class="bi bi-plus"></i>&nbsp;Create New Intervention Event</a>
+            <div class="row row-cols-auto">
+                {% for each_event in intervention_events %}
+                    <div class="col mb-3">
+                        <div class="card mb-3" style="width: 18rem;">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ each_event[1] }}</h5>
+                                <h6 class="card-subtitle text-body-secondary">Event Venue: {{ each_event[2] }}</h6>
+                                <h6 class="card-subtitle text-body-secondary">Start Date: {{ each_event[3] }}</h6>
+                                <h6 class="card-subtitle text-body-secondary">End Date: {{ each_event[4] }}</h6>
+                                <p class="card-text text-truncate">{{ each_event[5] }}</p>
+                                <div class="d-flex">
+                                    <div class="p-2">
+                                        <a href="{{ url_for('blog', id=each_event[0]) }}" class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i>&nbsp; Edit</a>
+                                    </div>
+                                    <div class="p-2 ms-auto">
+                                        <a href="{{ url_for('blog', id=each_event[0]) }}" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i>&nbsp; Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <h3>You currently have no intervention events</h3>
+            <a class="btn btn-primary" href="#"><i class="bi bi-plus"></i>&nbsp;Create New Intervention Event</a>
+        {% endif %}
+    {% elif  request.url.endswith('?page=intervention_reports')%}
+        <h2>My Intervention Events:</h2>
+        {% if intervention_reports %}
+            <a class="btn btn-primary mb-3" href="#"><i class="bi bi-plus"></i>&nbsp;Create New Intervention Event</a>
+            <div class="row row-cols-auto">
+                {% for each_report in intervention_reports %}
+                    <div class="col mb-3">
+                        <div class="card mb-3" style="width: 18rem;">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ each_report[3] }}</h5>
+                                <h6 class="card-subtitle text-body-secondary">Report Author: {{ each_report[1] }}</h6>
+                                <h6 class="card-subtitle text-body-secondary">Date Reported: {{ each_report[2] }}</h6>
+                                <p class="card-text text-truncate">{{ each_report[3] }}</p>
+                                <div class="d-flex">
+                                    <div class="p-2">
+                                        <a href="{{ url_for('blog', id=each_report[0]) }}" class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i>&nbsp; Edit</a>
+                                    </div>
+                                    <div class="p-2 ms-auto">
+                                        <a href="{{ url_for('blog', id=each_report[0]) }}" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i>&nbsp; Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <h3>You currently have no intervention reports</h3>
+            <a class="btn btn-primary" href="#"><i class="bi bi-plus"></i>&nbsp;Create New Intervention Event</a>
+        {% endif %}
+    {% endif %}
 </div>
 {% endblock %}
