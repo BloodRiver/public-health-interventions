@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Frequently Asked Questions{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1 class="text-center mb-3">Answers to Frequently Asked Questions</h1>
+    
+    {% if not all_articles %}
+        <h2 class="text-center">There are currently no FAQs available</h2>
+    {% else %}
+        {% for each_article in all_articles %}
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne">
+                            {{ each_article[0] }}
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            {{ each_article[1] }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+{% endblock %}

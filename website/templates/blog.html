@@ -3,5 +3,26 @@
 {% block title %}Blog - {% endblock %}
 
 {% block body %}
-    <h1>This is the Blog page</h1>
+    <div class="container" style="min-height: 500px;">
+        <h1> Blog Articles</h1>
+        {% if all_articles %}
+            <div class="row row-cols-auto">
+                {% for each_article in all_articles %}
+                    <div class="col mb-3">
+                        <div class="card mb-3" style="width: 18rem;">
+                            <img src="{% if each_article[4] %}{{ each_article[4] }}{% else %}{{ url_for('static', filename='no-image.webp') }}{% endif %}" class="card-img-top" alt="{{ each_article[1] }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ each_article[1] }}</h5>
+                                <h6 class="card-subtitle text-body-secondary">Date Published: {{ each_article[2] }}</h6>
+                                <p class="card-text text-truncate">{{ each_article[3] }}</p>
+                                <a href="{{ url_for('blog', id=each_article[0]) }}" class="icon-link">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <h3>Blog Articles coming soon</h3>
+        {% endif %}
+    </div>
 {% endblock %}
