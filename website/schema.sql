@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 CREATE TABLE IF NOT EXISTS intervention (
     intervention_id INT NOT NULL AUTO_INCREMENT,
+    thumbnail_image LONGTEXT,
     organizer_id INT NOT NULL,
     start_date DATE,
     end_date DATE,
@@ -24,6 +25,7 @@ CREATE TABLE IF NOT EXISTS intervention (
 
 CREATE TABLE IF NOT EXISTS article (
     article_id INT NOT NULL AUTO_INCREMENT,
+    thumbnail_image LONGTEXT,
     author_id INT NOT NULL,
     title TINYTEXT NOT NULL,
     date_published DATE NOT NULL,
