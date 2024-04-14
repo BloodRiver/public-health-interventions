@@ -143,8 +143,24 @@ def create_app(test_config=None):
         return render_template("faq.html", all_articles=all_articles)
 
     @app.route("/events/")
+    def events():
+        mydb = db.get_db()
+        cursor = mydb.cursor()
+        cursor.execute(f"SELECT intervention_id, thumbnail_image, event_name, start_date, event_venue, event_details FROM intervention ORDER BY start_date DESC")
+        all_events = cursor.fetchall()
+        print(all_events)
+        cursor.close()
+        return render_template("events.html", all_events=all_events)
     @app.route("/events/<id>")
-    def events(id=None):
+    def event_details(id):
+        # if request.method == "GET":
+        #     if not id:
+        #         mydb = db.get_db()
+        #         cursor = mydb.cursor()
+        #         cursor.execute(f"SELECT intervention_id, thumbnail_image, event_name, start_date, event_venue, event_details FROM intervention ORDER BY start_date DESC")
+        #         all_events = cursor.fetchall()
+        #         print(all_events)
+        #         cursor.close()
         return render_template("events.html")
     
     @app.route("/blog/")
@@ -227,14 +243,14 @@ def create_app(test_config=None):
     def create_article():
         if request.method == "GET":
             if session.get("user"):
-                if session.get("user")['user_type'] in ('ORG', 'ADM'):
+                if session.get("user")['user_type'] in ('HCP', 'ADM'):
                     return render_template("create_edit_article.html")
             else:
                 return redirect(app.url_for("login"))
             
         if request.method == "POST":
             if session.get("user"):
-                if session.get("user")['user_type'] in ('ORG', 'ADM'):
+                if session.get("user")['user_type'] in ('HCP', 'ADM'):
                     title = escape(request.form['title'])
                     content = escape(request.form['content'])
                     article_type = request.form.get('article_type')
@@ -281,5 +297,58 @@ def create_app(test_config=None):
     @app.route("/images/<filename>")
     def images(filename):
         return send_from_directory(MEDIA_ROOT, filename)
+    
+    @app.route("/create-intervention-event/", methods=("GET", "POST"))
+    def create_intervention_event():
+        if request.method == "GET":
+            if session.get("user"):
+                if session.get("user")['user_type'] in ('ORG', 'ADM'):
+                    return render_template("create_edit_intervention.html")
+            else:
+                return redirect(app.url_for("login"))
+        if request.method == "POST":
+            event_name = escape(request.form['event_name'])
+            start_date = escape(request.form['start_date'])
+            end_date = escape(request.form['end_date'])
+            event_venue = escape(request.form['event_venue'])
+            event_details = escape(request.form['event_details'])
+
+            filename = None
+            if 'thumbnail_image' in request.files:
+                img = request.files['thumbnail_image']
+                if img:
+                    image = Image.open(img)
+                    filename = secure_filename(img.filename)
+                    image.save(os.path.join(MEDIA_ROOT, filename))
+            mydb = db.get_db()
+            cursor = mydb.cursor()
+
+            if filename:
+                query = f"""
+                    INSERT INTO intervention
+                        (intervention_id, thumbnail_image, organizer_id, start_date, end_date, event_name, event_venue, event_details, event_status)
+                    VALUES
+                        (NULL, '{filename}', {session.get("user")['user_id']}, '{start_date}', '{end_date}', '{event_name}', '{event_venue}', '{event_details}', 'Upcoming')
+                """
+            else:
+                query = f"""
+                    INSERT INTO intervention
+                        (intervention_id, thumbnail_image, organizer_id, start_date, end_date, event_name, event_venue, event_details, event_status)
+                    VALUES
+                        (NULL, NULL, {session.get("user")['user_type']}, '{start_date}', '{end_date}', '{event_name}', '{event_venue}', '{event_details}', 'Upcoming')
+                """
+
+            cursor.execute(query)
+
+            mydb.commit()
+            cursor.close()
+            return redirect(app.url_for('create_intervention_success'))
+
+            
+        return render_template("create_edit_intervention.html")
+    
+    @app.route("/create-intervention-success/")
+    def create_intervention_success():
+        return render_template("create_intervention_success.html")
 
     return app

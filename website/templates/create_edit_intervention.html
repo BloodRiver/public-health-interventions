@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Article{% endblock %}
+
+{% block body %}
+    <div class="container" style="min-height: 500px;">
+        <form class="d-flex flex-column" name="createArticleForm" method="POST" enctype="multipart/form-data">
+            <legend>{% if edit %}Edit{% else %}Create{% endif %} Intervention Event</legend>
+            <div class="d-flext justify-content-center">
+                {% if image_url %}
+                <div class="p-2">
+                    <img src="{{ url_for('images', filename=image_url) }}" width="200px">
+                </div>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                <label for="thumbnail_image_input" class="form-label">Thumbnail Image:</label>
+                <input {% if not image_url %}required{% endif %} type="file" accept="image/*" class="form-control " value="{{ title }}" id="thumbnail_image_input"
+                    name="thumbnail_image">
+            </div>
+            <div class="mb-3">
+                <label for="event_name_input" class="form-label">Event Name</label>
+                <input required type="text" class="form-control " value="{{ title }}" id="event_name_input"
+                    name="event_name">
+            </div>
+            <div class="mb-3">
+                <label for="start_date_input" class="form-label">Start Date</label>
+                <input style="width: fit-content;" required type="date" class="form-control " value="{{ start_date }}" id="start_date_input"
+                    name="start_date">
+            </div>
+            <div class="mb-3">
+                <label for="end_date_input" class="form-label">End Date</label>
+                <input style="width: fit-content;" required type="date" class="form-control " value="{{ end_date }}" id="end_date_input"
+                    name="end_date">
+            </div>
+
+            <div class="mb-3">
+                <label for="event_venue_input" class="form-label">Event Venue</label>
+                <input required type="text" class="form-control " value="{{ event_venue }}" id="event_venue_input"
+                    name="event_venue">
+            </div>
+            
+            <div class="mb-3">
+                <label for="event_details_textarea" class="form-label">Event Details</label>
+                <textarea required class="form-control" id="event_details_textarea" name="event_details">{{ event_details }}</textarea>
+            </div>
+
+            <button type="submit" class="btn btn-lg btn-primary">Save Event</button>
+        </form>
+    </div>
+{% endblock %}

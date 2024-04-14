@@ -1,7 +1,29 @@
 {% extends 'base.html' %}
 
-{% block title %}Event - {% endblock %}
+{% block title %}Events - {% endblock %}
 
 {% block body %}
-    <h1>This is the events page</h1>
+    <div class="container" style="min-height: 500px;">
+        <h1>Intervention Events</h1>
+        {% if all_events %}
+            <div class="row row-cols-auto">
+                {% for each_event in all_events %}
+                    <div class="col mb-3">
+                        <div class="card mb-3" style="width: 18rem;">
+                            <img src="{% if each_event[1] %}{{ url_for('images', filename=each_event[1]) }}{% else %}{{ url_for('static', filename='no-image.webp') }}{% endif %}" class="card-img-top" alt="{{ each_event[2] }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ each_event[2] }}</h5>
+                                <h6 class="card-subtitle text-body-secondary">Event Date: {{ each_event[3] }}</h6>
+                                <h6 class="card-subtitle text-body-secondary">Event Venue: {{ each_event[4] }}</h6>
+                                <p class="card-text text-truncate">{{ each_event[5] }}</p>
+                                <a href="{{ url_for('event_details', id=each_event[0]) }}" class="icon-link">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <h3>Events coming soon</h3>
+        {% endif %}
+    </div>
 {% endblock %}
