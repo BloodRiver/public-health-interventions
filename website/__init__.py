@@ -115,6 +115,10 @@ def create_app(test_config=None):
     @app.route("/blog/<id>")
     def blog(id=None):
         return render_template("blog.html")
+    
+    @app.route("/dashboard/")
+    def dashboard():
+        return render_template("dashboard.html")
 
     
     return app
