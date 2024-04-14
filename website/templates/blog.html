@@ -10,7 +10,7 @@
                 {% for each_article in all_articles %}
                     <div class="col mb-3">
                         <div class="card mb-3" style="width: 18rem;">
-                            <img src="{% if each_article[4] %}{{ each_article[4] }}{% else %}{{ url_for('static', filename='no-image.webp') }}{% endif %}" class="card-img-top" alt="{{ each_article[1] }}">
+                            <img src="{% if each_article[4] %}{{ url_for('images', filename=each_article[4]) }}{% else %}{{ url_for('static', filename='no-image.webp') }}{% endif %}" class="card-img-top" alt="{{ each_article[1] }}">
                             <div class="card-body">
                                 <h5 class="card-title">{{ each_article[1] }}</h5>
                                 <h6 class="card-subtitle text-body-secondary">Date Published: {{ each_article[2] }}</h6>

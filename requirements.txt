@@ -3,3 +3,4 @@ pymysql
 flask-ckeditor
 flask-wtf
 cryptography
+Pillow

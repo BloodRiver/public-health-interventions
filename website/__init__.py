@@ -1,19 +1,30 @@
 import os
-
-from flask import Flask, render_template, request, session, redirect
+import stat
+from flask import Flask, render_template, request, session, redirect, send_from_directory
 from markupsafe import escape
 from flask_ckeditor import CKEditor
+from werkzeug.utils import secure_filename
+from datetime import datetime as dt
+from PIL import Image
 
 ckeditor = CKEditor()
 
+BASE_DIR = os.path.dirname(__file__)
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
+
+os.makedirs(MEDIA_ROOT, exist_ok=True)
+os.chmod(MEDIA_ROOT, stat.S_IRWXU)
 
 def create_app(test_config=None):
+    global MEDIA_ROOT
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
     ckeditor.init_app(app)
     app.config.from_mapping(
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
+        MEDIA_ROOT = MEDIA_ROOT
     )
 
     if test_config is None:
@@ -143,7 +154,7 @@ def create_app(test_config=None):
             if not id:
                 mydb = db.get_db()
                 cursor = mydb.cursor()
-                cursor.execute(f"SELECT article_id, title, date_published, content FROM article WHERE article_type='B' ORDER BY date_published DESC")
+                cursor.execute(f"SELECT article_id, title, date_published, content, thumbnail_image FROM article WHERE article_type='B' ORDER BY date_published DESC")
                 all_articles = cursor.fetchall()
                 print(all_articles)
                 cursor.close()
@@ -212,5 +223,63 @@ def create_app(test_config=None):
             else:
                 return "<h1>Page Not Found</h1>"
 
-    
+    @app.route("/create-article/", methods=("GET", "POST"))
+    def create_article():
+        if request.method == "GET":
+            if session.get("user"):
+                if session.get("user")['user_type'] in ('ORG', 'ADM'):
+                    return render_template("create_edit_article.html")
+            else:
+                return redirect(app.url_for("login"))
+            
+        if request.method == "POST":
+            if session.get("user"):
+                if session.get("user")['user_type'] in ('ORG', 'ADM'):
+                    title = escape(request.form['title'])
+                    content = escape(request.form['content'])
+                    article_type = request.form.get('article_type')
+                    if not article_type:
+                        article_type = 'B'
+                    filename = None
+                    if 'thumbnail_image' in request.files:
+                        img = request.files['thumbnail_image']
+                        if img:
+                            image = Image.open(img)
+                            filename = secure_filename(img.filename)
+                            image.save(os.path.join(MEDIA_ROOT, filename))
+
+                    mydb = db.get_db()
+                    cursor = mydb.cursor()
+
+                    if filename:
+                        query = f"""
+                            INSERT INTO article
+                                (article_id, thumbnail_image, author_id, title, date_published, content, article_type)
+                            VALUES
+                                (NULL, '{filename}', {session.get('user')['user_id']}, '{title}', '{str(dt.today().date())}', '{content}', '{article_type}')
+                        """
+                    else:
+                        query = f"""
+                            INSERT INTO article
+                                (article_id, thumbnail_image, author_id, title, date_published, content, article_type)
+                            VALUES
+                                (NULL, NULL, {session.get('user')['user_id']}, '{title}', '{str(dt.today().date())}', '{content}', '{article_type}')
+                        """
+                    print(query)
+                    cursor.execute(query)
+                    mydb.commit()
+                    cursor.close()
+                    return redirect(app.url_for("create_article_success"))
+                
+    @app.route("/create-article-success/")
+    def create_article_success():
+        if request.method == "GET":
+            if session.get("user"):
+                if session.get("user")['user_type'] in ('ORG', 'ADM'):
+                    return render_template("create_article_success.html")
+                
+    @app.route("/images/<filename>")
+    def images(filename):
+        return send_from_directory(MEDIA_ROOT, filename)
+
     return app
