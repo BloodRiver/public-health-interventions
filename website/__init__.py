@@ -106,5 +106,15 @@ def create_app(test_config=None):
             session['user'] = None
         return redirect(app.url_for('index'))
 
+    @app.route("/events/")
+    @app.route("/events/<id>")
+    def events(id=None):
+        return render_template("events.html")
+    
+    @app.route("/blog/")
+    @app.route("/blog/<id>")
+    def blog(id=None):
+        return render_template("blog.html")
+
     
     return app
