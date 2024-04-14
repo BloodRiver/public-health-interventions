@@ -351,4 +351,49 @@ def create_app(test_config=None):
     def create_intervention_success():
         return render_template("create_intervention_success.html")
 
+    @app.route("/create-intervention-report/", methods=("GET", "POST"))
+    def create_intervention_report():
+        if request.method == "GET":
+            if not session.get("user"):
+                return redirect(app.url_for("login"))
+            if not session.get("user")['user_type'] in ('ORG', 'ADM'):
+                return "<h1>Page Not Found</h1>"
+
+            mydb = db.get_db()
+            cursor = mydb.cursor()
+
+            cursor.execute(f"""
+                SELECT intervention_id, event_name FROM intervention WHERE organizer_id = {session.get("user")['user_id']}
+            """)
+            interventions = cursor.fetchall()
+            cursor.close()
+
+            return render_template("create_edit_intervention_report.html", interventions=interventions)
+        
+        if request.method == "POST":
+            if not session.get("user"):
+                return redirect(app.url_for("login"))
+            if not session.get("user")["user_type"] in ('ORG', 'ADM'):
+                return "<h1>Page Not Found</h1>"
+            
+            mydb = db.get_db()
+            cursor = mydb.cursor()
+
+            intervention_id = escape(request.form['intervention_id'])
+            report_title = escape(request.form['report_title'])
+            date_reported = escape(request.form['date_reported'])
+            report_content = escape(request.form['report_content'])
+
+            cursor.execute(f"""
+                INSERT INTO intervention_report
+                    (report_id, author_id, intervention_id, date_reported, report_title, report_content)
+                VALUES
+                    (NULL, {session.get("user")['user_id']}, {intervention_id}, '{date_reported}', '{report_title}', '{report_content}')
+            """)
+
+            mydb.commit()
+            cursor.close()
+
+            return render_template("create_intervention_report_success.html")
+
     return app
