@@ -48,7 +48,8 @@ def create_app(test_config=None):
     @app.route("/login/", methods=('GET', 'POST'))
     def login():
         if request.method == 'GET':
-            return render_template("login.html")
+            if session.get("user") is not None:
+                return redirect(app.url_for("index"))
 
         if request.method == 'POST':
             email = escape(request.form['email'])
@@ -64,9 +65,14 @@ def create_app(test_config=None):
                 return render_template("login_successful.html")
             else:
                 return render_template("login.html", error="password", email=email)
+        return render_template("login.html")
     
     @app.route("/register/", methods=('GET', 'POST'))
     def register():
+        if request.method == 'GET':
+            if session.get("user") is not None:
+                return redirect(app.url_for("index"))
+
         if request.method == 'POST':
             username = escape(request.form['username'])
             email = escape(request.form['email'])
@@ -114,6 +120,16 @@ def create_app(test_config=None):
         if session['user']:
             session['user'] = None
         return redirect(app.url_for('index'))
+    
+    @app.route("/faq/")
+    def faq():
+        mydb = db.get_db()
+        cursor = mydb.cursor()
+        cursor.execute("SELECT title, content FROM article WHERE article_type = 'F' ORDER BY article.date_published DESC")
+
+        all_articles = cursor.fetchall()
+        cursor.close()
+        return render_template("faq.html", all_articles=all_articles)
 
     @app.route("/events/")
     @app.route("/events/<id>")
@@ -123,7 +139,15 @@ def create_app(test_config=None):
     @app.route("/blog/")
     @app.route("/blog/<id>")
     def blog(id=None):
-        return render_template("blog.html")
+        if request.method == "GET":
+            if not id:
+                mydb = db.get_db()
+                cursor = mydb.cursor()
+                cursor.execute(f"SELECT article_id, title, date_published, content FROM article WHERE article_type='B' ORDER BY date_published DESC")
+                all_articles = cursor.fetchall()
+                print(all_articles)
+                cursor.close()
+        return render_template("blog.html", all_articles=all_articles)
     
     @app.route("/dashboard/")
     @app.route("/dashboard")
