@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-04-12T17:07:20.512Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0" etag="V6O3KXAYr-nzMBgrEKXY" version="24.2.3" type="github">
+<mxfile host="app.diagrams.net" modified="2024-04-14T14:58:59.181Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36" etag="llqYztgK4d3eXmjBh5MV" version="24.2.3" type="github">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
-    <mxGraphModel dx="1282" dy="535" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2336" pageHeight="1654" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
+    <mxGraphModel dx="1805" dy="744" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2336" pageHeight="1654" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -79,7 +79,7 @@
             <mxRectangle width="30" height="160" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="C-vyLk0tnHw3VtMMgP7b-11" value="start_date date NOT NULL&#xa;end_date date NOT NULL&#xa;event_name char(300) NOT NULL&#xa;event_venue char(400) NOT NULL&#xa;event_details longtext NOT NULL&#xa;event_status ENUM (&#39;Upcoming&#39;,&#xa;                             &#39;Ongoing&#39;,&#xa;                             &#39;Cancelled&#39;,&#xa;                             &#39;Postponed&#39;,&#xa;                             &#39;Completed&#39;) NOT NULL DEFAULT &#39;Upcoming&#39;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;" parent="C-vyLk0tnHw3VtMMgP7b-9" vertex="1">
+        <mxCell id="C-vyLk0tnHw3VtMMgP7b-11" value="start_date date NOT NULL&#xa;thumbnail_image LONGTEXT&#xa;end_date date NOT NULL&#xa;event_name char(300) NOT NULL&#xa;event_venue char(400) NOT NULL&#xa;event_details longtext NOT NULL&#xa;event_status ENUM (&#39;Upcoming&#39;,&#xa;                             &#39;Ongoing&#39;,&#xa;                             &#39;Cancelled&#39;,&#xa;                             &#39;Postponed&#39;,&#xa;                             &#39;Completed&#39;) NOT NULL DEFAULT &#39;Upcoming&#39;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;" parent="C-vyLk0tnHw3VtMMgP7b-9" vertex="1">
           <mxGeometry x="30" width="370" height="160" as="geometry">
             <mxRectangle width="370" height="160" as="alternateBounds" />
           </mxGeometry>
@@ -187,7 +187,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="Pu0zvANKRgPWiGbxQ75c-66" value="ARTICLE" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=1;fontStyle=1;align=center;resizeLast=1;strokeColor=default;noLabel=0;" parent="1" vertex="1">
-          <mxGeometry x="810" y="67" width="400" height="170.00000000000003" as="geometry" />
+          <mxGeometry x="810" y="66" width="400" height="170.00000000000003" as="geometry" />
         </mxCell>
         <mxCell id="Pu0zvANKRgPWiGbxQ75c-67" value="" style="shape=partialRectangle;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=1;" parent="Pu0zvANKRgPWiGbxQ75c-66" vertex="1">
           <mxGeometry y="30" width="400" height="30" as="geometry" />
@@ -223,7 +223,7 @@
             <mxRectangle width="30" height="70" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Pu0zvANKRgPWiGbxQ75c-75" value="date_published date NOT NULL&#xa;title tinytext(300) NOT NULL&#xa;content longtext NOT NULL" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;" parent="Pu0zvANKRgPWiGbxQ75c-73" vertex="1">
+        <mxCell id="Pu0zvANKRgPWiGbxQ75c-75" value="date_published date NOT NULL&#xa;thumbnail_image LONGTEXT&#xa;title tinytext(300) NOT NULL&#xa;content longtext NOT NULL" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;" parent="Pu0zvANKRgPWiGbxQ75c-73" vertex="1">
           <mxGeometry x="30" width="370" height="70" as="geometry">
             <mxRectangle width="370" height="70" as="alternateBounds" />
           </mxGeometry>
@@ -505,7 +505,7 @@
         <mxCell id="aB5LagIoBiGOEzeyCDAx-27" value="volunteer_present BOOLEAN DEFAULT FALSE&amp;nbsp;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" parent="aB5LagIoBiGOEzeyCDAx-26" vertex="1">
           <mxGeometry y="50" width="270" height="42" as="geometry" />
         </mxCell>
-        <mxCell id="1sxoJcSozDdp8VRpA5Vq-1" value="" style="fontSize=12;html=1;endArrow=ERoneToMany;startArrow=ERzeroToMany;rounded=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="Pu0zvANKRgPWiGbxQ75c-96">
+        <mxCell id="1sxoJcSozDdp8VRpA5Vq-1" value="" style="fontSize=12;html=1;endArrow=ERoneToMany;startArrow=ERzeroToMany;rounded=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" parent="1" source="Pu0zvANKRgPWiGbxQ75c-96" edge="1">
           <mxGeometry width="100" height="100" relative="1" as="geometry">
             <mxPoint x="1180" y="970" as="sourcePoint" />
             <mxPoint x="1290" y="1000" as="targetPoint" />
