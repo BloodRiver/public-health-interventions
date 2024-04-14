@@ -66,7 +66,7 @@
                 {% for each_event in latest_events %}
                 <div class="col">
                     <div class="card" style="width: 18rem;">
-                        <img src="..." class="card-img-top" alt="...">
+                        <img src="{% if each_event[4] %}{{ url_for('images', filename=each_event[4]) }}{% else %}{{ url_for('static', filename='no-image.webp') }}{% endif %}" class="card-img-top" alt="{{ each_event[1] }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ each_event[1] }}</h5>
                             <h6 class="card-subtitle text-body-secondary">Venue: {{ each_event[2] }}</h6>
@@ -92,7 +92,7 @@
                 {% for each_blog_post in blog_posts %}
                     <div class="col">
                         <div class="card" style="width: 18rem;">
-                            <img src="..." class="card-img-top" alt="...">
+                            <img src="{% if each_blog_post[3] %}{{ url_for('images', filename=each_blog_post[3]) }}{% else %}{{ url_for('static', filename='no-image.webp') }}{% endif %}" class="card-img-top" alt="{{ each_blog_post[1] }}">
                             <div class="card-body">
                                 <h5 class="card-title">{{ each_blog_post[1] }}</h5>
                                 <p class="card-text">{{ each_blog_post[2] }}</p>

@@ -49,9 +49,9 @@ def create_app(test_config=None):
     def index():
         mydb = db.get_db()
         cursor = mydb.cursor()
-        cursor.execute("SELECT intervention_id, event_name, event_venue, event_details FROM intervention WHERE event_status='Upcoming' ORDER BY start_date LIMIT 3")
+        cursor.execute("SELECT intervention_id, event_name, event_venue, event_details, thumbnail_image FROM intervention WHERE event_status='Upcoming' ORDER BY start_date LIMIT 3")
         latest_events = cursor.fetchall()
-        cursor.execute("SELECT article_id, title, content FROM article WHERE article_type='B' ORDER BY date_published DESC LIMIT 3")
+        cursor.execute("SELECT article_id, title, content, thumbnail_image FROM article WHERE article_type='B' ORDER BY date_published DESC LIMIT 3")
         blog_posts = cursor.fetchall()
         cursor.close()
         return render_template("index.html", latest_events=latest_events, blog_posts=blog_posts)
@@ -193,7 +193,7 @@ def create_app(test_config=None):
                 if session.get("user")['user_type'] in ('HCP', 'ADM'):
                     mydb = db.get_db()
                     cursor = mydb.cursor()
-                    cursor.execute(f"SELECT article_id, title, date_published, content FROM article WHERE author_id={session.get('user')['user_id']} AND article_type='B' ORDER BY date_published DESC")
+                    cursor.execute(f"SELECT article_id, title, date_published, content, thumbnail_image FROM article WHERE author_id={session.get('user')['user_id']} AND article_type='B' ORDER BY date_published DESC")
                     my_articles = cursor.fetchall()
                     return render_template("dashboard.html", my_articles=my_articles)
                 else:
@@ -202,7 +202,7 @@ def create_app(test_config=None):
                 if session.get("user")['user_type'] == 'ADM':
                     mydb = db.get_db()
                     cursor = mydb.cursor()
-                    cursor.execute(f"SELECT article_id, title, date_published, content FROM article WHERE author_id={session.get('user')['user_id']} AND article_type='F' ORDER BY date_published DESC")
+                    cursor.execute(f"SELECT article_id, title, date_published, content, thumbnail_image FROM article WHERE author_id={session.get('user')['user_id']} AND article_type='F' ORDER BY date_published DESC")
                     my_articles = cursor.fetchall()
                     return render_template("dashboard.html", my_articles=my_articles)
                 else:
@@ -211,7 +211,7 @@ def create_app(test_config=None):
                 if session.get("user")['user_type'] in ('ORG', 'ADM'):
                     mydb = db.get_db()
                     cursor = mydb.cursor()
-                    cursor.execute(f"SELECT intervention_id, event_name, event_venue, start_date, end_date, event_details FROM intervention WHERE organizer_id={session.get('user')['user_id']} ORDER BY start_date DESC")
+                    cursor.execute(f"SELECT intervention_id, event_name, event_venue, start_date, end_date, event_details, thumbnail_image FROM intervention WHERE organizer_id={session.get('user')['user_id']} ORDER BY start_date DESC")
                     intervention_events = cursor.fetchall()
                     return render_template("dashboard.html", intervention_events=intervention_events)
                 else:
@@ -225,10 +225,12 @@ def create_app(test_config=None):
                             intervention_report.report_id, user.username,
                             intervention_report.date_reported,
                             intervention_report.report_title,
-                            intervention_report.report_content
+                            intervention_report.report_content,
+                            intervention.thumbnail_image
                         FROM intervention_report, intervention, user
                         WHERE intervention_report.author_id=1
-                                AND user.user_id=intervention_report.author_id 
+                                AND user.user_id=intervention_report.author_id
+                                AND intervention_report.intervention_id=intervention.intervention_id 
                         ORDER BY intervention_report.date_reported DESC;
                     """)
                     intervention_reports = cursor.fetchall()
