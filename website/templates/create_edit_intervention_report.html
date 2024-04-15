@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Intervention Report - {% endblock %}
+
+{% block body %}
+    <div class="container" style="min-height: 500px;">
+        <form class="d-flex flex-column" name="createInterventionForm" method="POST" enctype="multipart/form-data">
+            <legend>{% if edit %}Edit{% else %}Create{% endif %} Intervention Report</legend>
+
+            <div class="mb-3">
+                <label for="intervention_id_input" class="form-label">Intervention</label>
+                <select name="intervention_id" id="intervention_id_input" class="form-select">
+                    {% for each_option in interventions %}
+                        <option {% if loop.first or each_option[0] == intervention_id %}selected{% endif %} value="{{ each_option[0] }}">{{ each_option[1] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="report_title_input" class="form-label">Report Title</label>
+                <input type="text" name="report_title" id="report_title_input" class="form-control" value="{{ report_title }}">
+            </div>
+
+            <div class="mb-3">
+                <label for="date_reported_input" class="form-label">Date Reported</label>
+                <input type="date" name="date_reported" id="date_reported_input" class="form-control" style="width: fit-content" value="{{ date_reported }}">
+            </div>
+
+            <div class="mb-3">
+                <label for="report_content_input" class="form-label">Report Content</label>
+                <textarea id="report_content_input" name="report_content" class="form-control">{{ report_content }}</textarea>
+            </div>
+
+            <button type="submit" class="btn btn-lg btn-primary">Save Report</button>
+        </form>
+    </div>
+{% endblock %}
