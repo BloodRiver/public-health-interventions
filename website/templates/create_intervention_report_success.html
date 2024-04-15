@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Login Successful - {% endblock %}
+
+{% block script %}
+    <script type="text/javascript">
+        var timer = setInterval(function ()
+        {
+            window.location.replace("{{ url_for('create_intervention_report') }}");
+        }, 3000);
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Create/Edit Intervention Report Successful</h1>
+        <h4>You will soon be redirected to the Create Intervention Report Page</h4>
+        <h5>Please click <a href="{{ url_for('create_intervention_report') }}">here</a> if you are not automatically redirected</h5>
+    </div>
+{% endblock %}
