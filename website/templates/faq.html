@@ -11,15 +11,15 @@
         <h2 class="text-center">There are currently no FAQs available</h2>
     {% else %}
         {% for each_article in all_articles %}
-            <div class="accordion" id="accordionExample">
+            <div class="accordion mb-3" id="accordion{{ loop.index }}">
                 <div class="accordion-item">
                     <h2 class="accordion-header">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                            aria-expanded="true" aria-controls="collapseOne">
+                        <button class="accordion-button {% if not loop.first %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}"
+                            aria-expanded="{% if loop.first %}true{% else %}false{% endif %}" aria-controls="collapse{{ loop.index }}">
                             {{ each_article[0] }}
                         </button>
                     </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                    <div id="collapse{{ loop.index }}" class="accordion-collapse collapse {% if loop.first %}show{% endif %}" data-bs-parent="#accordion{{ loop.index }}">
                         <div class="accordion-body">
                             {{ each_article[1] }}
                         </div>

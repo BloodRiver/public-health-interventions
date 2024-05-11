@@ -30,9 +30,9 @@
                     <li class="nav-item">
                         <a class="nav-link {% if url_for('index') == request.full_path[:-1] %}active{% endif %}" aria-current="page" href="{{ url_for('index') }}">Home</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="{{ url_for('index') }}#aboutUs">About Us</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link {% if url_for('faq') == request.full_path[:-1] %}active{% endif %}" aria-current="page" href="{{ url_for('faq') }}">FAQ</a>
                     </li>
